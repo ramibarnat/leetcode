@@ -1,3 +1,4 @@
+from collections import Counter, defaultdict
 import heapq
 
 def topKFrequentBad(nums,k):
@@ -37,7 +38,7 @@ def topKFrequentBad(nums,k):
                     break
     return res
 
-def topKFrequent(nums,k):
+def topKFrequentBetter(nums,k):
     # cut_off = 1 total = 1, dic = {1:1}, res = {1:{1}}
     # cut_off = 1 total = 1, dic = {1:2}, res = {1:{}, 2:{1}}
     # cut_off = 1 total = 1, dic = {1:3}, res = {1:{}, 2:{}, 3:{1}}
@@ -45,7 +46,7 @@ def topKFrequent(nums,k):
     # cut_off = 2 total = 2, dic = {1:3, 2:2, 3:1}, res = {1:{3}, 2:{2}, 3:{1}}
     # cut_off was incremented because total was already at k and we attempted to add another value
     # that was greater than or equal to cut_off but wasn't already above the cut_off before
-    
+
     cut_off = 1
     total = 0
     dic = {}
@@ -79,6 +80,37 @@ def topKFrequent(nums,k):
     return ans
                 
 
+def topKFrequentEvenBetter(nums,k):
+    # freq = [[]] * len(nums) THIS DOES NOT WORK, each array has the same reference.
+    freq = [[] for i in range(len(nums)+1)]
+    most_buckets = len(nums) + 1
+    dic = defaultdict(int)
+    for num in nums:
+        dic[num] += 1
+
+    for key,value in dic.items():
+        most_buckets -= 1
+        freq[value].append(key)
+    
+    res = []
+    for i in range(most_buckets,0,-1):
+        for num in freq[i]:
+            res.append(num)
+        if len(res) == k:
+            return res
+
+
+def topKFrequent(nums,k):
+    freq = defaultdict(list)
+    for num, count in Counter(nums).items():
+        freq[count].append(num)
+    
+    res = []
+    for i in reversed(range(len(nums)+1)):
+        res.extend(freq[i])
+        if len(res) == k:
+            return res
+        
 
 # k = 2
 # nums = [1,1,1,2,2,3]
