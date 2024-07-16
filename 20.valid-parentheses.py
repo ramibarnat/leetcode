@@ -3,11 +3,10 @@
 #
 # [20] Valid Parentheses
 #
-from collections import deque
 # @lc code=start
 class Solution:
     def isValid(self, s: str) -> bool:
-        stack = deque()
+        stack = []
         for c in s:
             if c == ")" and (not stack or stack.pop() != "("):
                 return False
