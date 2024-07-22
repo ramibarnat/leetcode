@@ -5,7 +5,6 @@
 #
 import time
 import os
-from tabulate import tabulate
 from typing import List
 # @lc code=start
 class Solution:

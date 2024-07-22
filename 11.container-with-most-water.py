@@ -26,8 +26,12 @@ class Solution:
         l, r = 0, len(height)-1
         max_area = -1
         while r > l:
-            if min(height[l],height[r]) * (r-l) > max_area:
-                max_area = min(height[l],height[r]) * (r-l)
+            # max_area = max(min(height[l],height[r]) * (r-l), max_area)
+            
+            # this is actually faster than using the max function
+            new_area = min(height[l],height[r]) * (r-l)
+            if new_area > max_area:
+                max_area = new_area
 
             if height[l] < height[r]:
                 l += 1
