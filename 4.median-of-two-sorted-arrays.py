@@ -7,7 +7,7 @@ from collections import List
 # @lc code=start
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        
+        pass
 # @lc code=end
 
 [1,3,4,6,8,10]
