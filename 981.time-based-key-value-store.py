@@ -25,7 +25,11 @@ class TimeMap:
 
             # This divides by 2 and rounds down by shifting bits over by one
             # Moving bits over by 1 will basically eliminate a power of 2
-            # Ex: 111101 = 61, 011110 = 30
+            # Ex: 111101 = 61
+            #     011110 = 30
+            #     001111 = 15
+            #     000111 = 7
+    
             mid = (l+r) >> 1 
             if timestamp == values[mid][0]:
                 return values[mid][1]
